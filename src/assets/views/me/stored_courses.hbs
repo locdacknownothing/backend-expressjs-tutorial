@@ -1,0 +1,79 @@
+<div class="mt-4">
+  <h3>My courses</h3>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Course Name</th>
+        <th scope="col">Level</th>
+        <th scope="col" colspan="3">Created Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each courses}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.title}}</td>
+          <td>Medium</td>
+          <td>{{this.createdAt}}</td>
+          <td>
+            <a href="/courses/{{this._id}}/edit" class="btn btn-info">Edit</a>
+          </td>
+          <td>
+            <a
+              href=""
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#delete-course-modal"
+              data-bs-id="{{this._id}}"
+            >Delete</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+{{! Delete course modal }}
+<div
+  class="modal fade"
+  id="delete-course-modal"
+  tabindex="-1"
+  aria-labelledby="deleteCourseLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteCourseLabel">Delete</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Do you sure to delete this course?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          id="delete-course"
+        >Delete</button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{! Delete hiddn form }}
+<form name="delete-hidden-form" method="POST"></form>
+
+<script src="/js/delete-course.js"></script>

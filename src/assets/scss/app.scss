@@ -1,0 +1,12 @@
+@import "variables";
+
+.gradient-text {
+  font-weight: bold;
+  background: linear-gradient(to right, #ffffff, #cb74f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.max-width-300 {
+  max-width: 300;
+}
