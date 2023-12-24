@@ -43,9 +43,38 @@ class CoursesController {
 
   // [DELETE] /:id
   delete(req, res, next) {
+    // overrided by mongoose-delete
+    Course.delete({ _id: req.params.id }, req.body)
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
+
+  // [PATCH] /:id/restore
+  restore(req, res, next) {
+    Course.restore({ _id: req.params.id })
+      .then(() => res.redirect("back"))
+      .catch(next);
+  }
+
+  // [DELETE] /:id/force
+  forceDestroy(req, res, next) {
     Course.deleteOne({ _id: req.params.id }, req.body)
       .then(() => res.redirect("back"))
       .catch(next);
+  }
+
+  // [POST] /handle-actions
+  handleActions(req, res, next) {
+    switch (req.body.action) {
+      case "delete":
+        Course.delete({ _id: { $in: req.body.courseIds } }, req.body)
+          .then(() => res.redirect("back"))
+          .catch(next);
+
+        break;
+      default:
+        res.json({ message: "Action is invalid!" });
+    }
   }
 }
 
