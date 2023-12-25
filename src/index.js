@@ -3,12 +3,15 @@ const express = require("express");
 const morgan = require("morgan");
 const handlebars = require("express-handlebars");
 const methodOverride = require("method-override");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 
 const app = express();
-const PORT = 3000;
 const route = require("./routes");
 const db = require("./config/db");
 const sortMiddleware = require("./app/middlewares/sortMiddleware");
+
+const PORT = process.env.PORT || 3000;
 
 // Connect to db
 db.connect();
@@ -61,7 +64,7 @@ app.engine(
   })
 );
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "assets\\views"));
+app.set("views", path.join(__dirname, "/assets/views"));
 
 app.listen(PORT, () => {
   console.log(`API is available on http://localhost:${PORT}`);

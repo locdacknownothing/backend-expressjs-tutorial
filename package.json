@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js",
+    "start": "node-sass src/assets/scss -o src/public/css && node src/index.js",
     "start-dev": "nodemon --inspect src/index.js",
     "watch": "node-sass --watch src/assets/scss -o src/public/css",
     "prettier": "lint-staged"
@@ -31,6 +31,7 @@
     "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "morgan": "^1.10.0",
