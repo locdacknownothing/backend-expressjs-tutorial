@@ -12,8 +12,16 @@ class SiteController {
   }
 
   // [GET] /search
-  search(req, res) {
-    res.render("search");
+  search(req, res, next) {
+    const query = req.query.q || "";
+    Course.find({ title: { $regex: query, $options: "i" } })
+      .then((courses) => {
+        res.render("search", {
+          courses: multipleMongooseToObject(courses),
+          query: query,
+        });
+      })
+      .catch(next);
   }
 }
 

@@ -1,4 +1,4 @@
-<form method="POST" action="">
+<form name="search-form" method="GET">
   <div class="my-3">
     <label for="search-input" class="form-label">Key words</label>
     <input
@@ -7,8 +7,42 @@
       id="search-input"
       name="q"
       placeholder="Input keywords ..."
+      value="{{query}}"
     />
   </div>
 
-  <button type="submit" class="btn btn-info text-white">Search</button>
+  <button
+    type="submit"
+    class="btn-search btn btn-info text-white"
+  >Search</button>
 </form>
+<div class="my-4">
+  <div class="row">
+    {{#if courses}}
+      {{#each courses}}
+        <div class="col-sm-6 col-lg-4">
+          <div class="card my-2">
+            <a href="/courses/{{this.slug}}">
+              <img
+                src="{{this.image}}"
+                class="card-img-top"
+                alt="{{this.title}}"
+              />
+            </a>
+            <div class="card-body">
+              <a href="/courses/{{this.slug}}" class="text-decoration-none">
+                <h6 class="card-title">{{this.title}}</h6>
+              </a>
+              <p class="card-text">{{this.description}}</p>
+              <a href="#" class="btn btn-primary">Buy course</a>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="text-center">No courses found.</div>
+    {{/if}}
+  </div>
+</div>
+
+<script src="/js/search-course.js"></script>
