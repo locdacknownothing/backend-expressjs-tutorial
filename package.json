@@ -5,9 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node-sass src/assets/scss -o src/public/css && node src/index.js",
+    "start": "node src/index.js",
     "start-dev": "nodemon --inspect src/index.js",
-    "watch": "node-sass --watch src/assets/scss -o src/public/css",
+    "watch-css": "node-sass --watch src/assets/scss -o src/public/css",
+    "build-css": "node-sass src/assets/scss -o src/public/css",
     "prettier": "lint-staged"
   },
   "keywords": [],
